@@ -127,8 +127,11 @@ def fix_and_parse_json(
     """
 
     with contextlib.suppress(json.JSONDecodeError):
-        json_to_load = json_to_load.replace("\t", "")
-        return json.loads(json_to_load)
+        if isinstance(json_to_load, dict):
+            json_to_load = json.dumps(json_to_load).replace("\t", "")
+        else:
+            json_to_load = json_to_load.replace("\t", "")
+            return json.loads(json_to_load)
 
     with contextlib.suppress(json.JSONDecodeError):
         json_to_load = correct_json(json_to_load)
