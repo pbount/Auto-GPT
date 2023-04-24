@@ -20,6 +20,9 @@ class Config(metaclass=Singleton):
 
     def __init__(self) -> None:
         """Initialize the Config class"""
+        self.workspace_path = None
+        self.file_logger_path = None
+
         self.debug_mode = False
         self.continuous_mode = False
         self.continuous_limit = 0
@@ -262,9 +265,9 @@ class Config(metaclass=Singleton):
         """Set the temperature value."""
         self.temperature = value
 
-    def set_memory_backend(self, value: int) -> None:
-        """Set the temperature value."""
-        self.memory_backend = value
+    def set_memory_backend(self, name: str) -> None:
+        """Set the memory backend name."""
+        self.memory_backend = name
 
 
 def check_openai_api_key() -> None:
